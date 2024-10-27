@@ -8,7 +8,7 @@ export default [
     {
         id: '2',
         title: 'Track & reflect',
-        description: 'Track your goal completion and reflect on your progress',
+        description: 'Track your goal completion and reflect on your progress.',
         icon: '📈',
     },
     {

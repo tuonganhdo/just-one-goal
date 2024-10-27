@@ -1,16 +1,22 @@
 import React from 'react';
 import {View, Text, StyleSheet, FlatList, useWindowDimensions} from 'react-native';
+import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+
 import slides from './onboardingSlides'
 
 export default function OnboardingItem({item}: {item: any}) {
-    const { width } = useWindowDimensions();
+    const {height, width, scale, fontScale} = useWindowDimensions();
 
     return (
-        <View style={[styles.container, {width}]}>
-            <Text style={styles.icon}>{item.icon}</Text>
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.description}>{item.description}</Text>
-        </View>
+        <SafeAreaProvider >
+            <SafeAreaView style={[styles.container, {width}, {height}]}>
+                <View style={styles.textContainer}>
+                    <Text style={styles.icon}>{item.icon}</Text>
+                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={styles.description}>{item.description}</Text>
+                </View>
+            </SafeAreaView>
+        </SafeAreaProvider>
     )
 };
 
@@ -19,21 +25,33 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 10,
+        alignSelf: 'center',
+    },
+    textContainer: {
+        flex: 0.3,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginBottom: 20,
+        paddingHorizontal: 55,
     },
     icon: {
-        fontSize: 70,
+        fontSize: 60,
         justifyContent: 'center',
+        paddingHorizontal: 20,
+        marginBottom: 30,
     },
     title: {
-        fontSize: 46,
-        fontWeight: 600,
-        marginBottom: 10,
-        textAlign: 'center'
+        fontSize: 30,
+        fontWeight: '600',
+        marginBottom: 15,
+        textAlign: 'center',
+        width: 'auto',
     },
     description: {
-        fontSize: 30,
-        fontWeight: 400,
-        textAlign: 'center'
+        fontSize: 20,
+        fontWeight: '400',
+        textAlign: 'center',
+        width: 'auto',
     }
 });
